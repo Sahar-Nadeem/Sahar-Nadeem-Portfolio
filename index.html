@@ -189,6 +189,8 @@
   #formStatus{ font-family:'JetBrains Mono', monospace; font-size:12.5px; min-height:16px;}
   .or-divider{ display:flex; align-items:center; gap:14px; max-width:520px; margin:36px auto; color:var(--mute); font-family:'JetBrains Mono', monospace; font-size:12px;}
   .or-divider::before, .or-divider::after{ content:""; flex:1; height:1px; background:var(--line);}
+  .contact-form select{ appearance:none; }
+.contact-form select option{ background:var(--panel); color:var(--white); }
 
   footer{ padding:40px 0; border-top:1px solid var(--line); text-align:center; position:relative; z-index:2;}
   footer p{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--mute);}
@@ -389,15 +391,46 @@
       <p>Open to freelance projects, WordPress work, and full-time frontend roles. Usually reply within a day.</p>
 
       <!-- Sends via Formspree — replace YOUR_FORM_ID below with your own form ID from formspree.io -->
-      <form id="contactForm" class="contact-form" action="https://formspree.io/f/meajbpnn" method="POST">
-        <div class="row2">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Your email" required>
-        </div>
-        <textarea name="message" placeholder="What are you looking to build?" required></textarea>
-        <button type="submit" class="btn btn-primary">Send message →</button>
-        <p id="formStatus"></p>
-      </form>
+     <form id="contactForm" class="contact-form" action="https://formspree.io/f/meajbpnn" method="POST">
+  <div class="row2">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+  </div>
+
+  <div class="row2">
+    <input type="tel" name="phone" placeholder="Phone / WhatsApp number">
+    <select name="project_type" required style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:8px; padding:14px 16px; color:var(--white); font-family:'Inter', sans-serif; font-size:14.5px; outline:none;">
+      <option value="" disabled selected>What do you need?</option>
+      <option value="New Website">New Website</option>
+      <option value="WordPress Site/Fix">WordPress Site / Fix</option>
+      <option value="Frontend Development">Frontend Development</option>
+      <option value="UI/UX Design">UI/UX Design</option>
+      <option value="Not Sure Yet">Not Sure Yet</option>
+    </select>
+  </div>
+
+  <div class="row2">
+    <select name="budget" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:8px; padding:14px 16px; color:var(--white); font-family:'Inter', sans-serif; font-size:14.5px; outline:none;">
+      <option value="" disabled selected>Budget range</option>
+      <option value="Under 20k PKR">Under 20k PKR</option>
+      <option value="20k - 50k PKR">20k – 50k PKR</option>
+      <option value="50k - 100k PKR">50k – 100k PKR</option>
+      <option value="100k+ PKR">100k+ PKR</option>
+      <option value="Not sure yet">Not sure yet</option>
+    </select>
+    <select name="timeline" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:8px; padding:14px 16px; color:var(--white); font-family:'Inter', sans-serif; font-size:14.5px; outline:none;">
+      <option value="" disabled selected>Timeline</option>
+      <option value="ASAP">ASAP</option>
+      <option value="Within 2 weeks">Within 2 weeks</option>
+      <option value="Within a month">Within a month</option>
+      <option value="Flexible">Flexible</option>
+    </select>
+  </div>
+
+  <textarea name="message" placeholder="Tell me about your project — what are you looking to build?" required></textarea>
+  <button type="submit" class="btn btn-primary">Send message →</button>
+  <p id="formStatus"></p>
+</form>
 
       <div class="or-divider">or reach me directly</div>
       <div class="contact-row">
