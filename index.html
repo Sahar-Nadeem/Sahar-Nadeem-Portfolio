@@ -194,6 +194,86 @@
 
   footer{ padding:40px 0; border-top:1px solid var(--line); text-align:center; position:relative; z-index:2;}
   footer p{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--mute);}
+  /* ===== MOBILE MENU BUTTON ===== */
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  background:none;
+  border:none;
+  padding:6px;
+  z-index:110;
+}
+.menu-toggle span{
+  width:24px; height:2px; background:var(--cyan); border-radius:2px; transition:all .3s;
+}
+.menu-toggle.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2){ opacity:0; }
+.menu-toggle.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+@media(max-width:768px){
+  .navlinks{
+    position:fixed; top:64px; left:0; right:0;
+    background:rgba(4,5,8,0.97); backdrop-filter:blur(16px);
+    flex-direction:column; align-items:flex-start; gap:0; padding:0;
+    max-height:0; overflow:hidden; transition:max-height .4s ease;
+    border-bottom:1px solid var(--line);
+  }
+  .navlinks.open{ max-height:320px; padding:10px 24px 20px; }
+  .navlinks a{ padding:14px 0; width:100%; border-bottom:1px solid var(--line); }
+  .navcta{ display:none; }
+  .menu-toggle{ display:flex; }
+  nav{ padding:16px 20px; }
+}
+
+/* ===== HERO ===== */
+@media(max-width:920px){
+  .hero{ padding:120px 0 60px; }
+  #heroCanvas{ height:280px; opacity:.8; }
+}
+@media(max-width:600px){
+  .wrap{ padding:0 20px; }
+  .hero-actions{ flex-direction:column; align-items:stretch; }
+  .btn{ justify-content:center; }
+  .stack-facts{ flex-direction:column; gap:16px; }
+}
+
+/* ===== SECTIONS / ABOUT ===== */
+@media(max-width:768px){
+  section{ padding:80px 0; }
+  .about-grid{ grid-template-columns:1fr; gap:40px; }
+}
+@media(max-width:600px){
+  section{ padding:60px 0; }
+  .section-head{ margin-bottom:40px; }
+}
+
+/* ===== PROJECT CARDS ===== */
+@media(max-width:600px){
+  .proj-content{ padding:26px 24px; }
+  .proj-content h3{ font-size:22px; }
+  .mock-body{ height:140px; }
+}
+
+/* ===== TIMELINE ===== */
+@media(max-width:600px){
+  .timeline{ padding-left:26px; }
+  .tnode::before{ left:-26px; }
+  .tnode h3{ font-size:17px; }
+}
+
+/* ===== CONTACT FORM ===== */
+@media(max-width:768px){
+  .contact-panel{ padding:50px 28px; }
+  .contact-form .row2{ grid-template-columns:1fr; }
+}
+@media(max-width:600px){
+  .contact-panel{ padding:40px 18px; border-radius:16px; }
+  .social-row{ gap:16px; font-size:12px; }
+  .contact-row{ flex-direction:column; }
+  .contact-row .btn{ justify-content:center; }
+}
 </style>
 </head>
 <body>
@@ -205,16 +285,19 @@
 <div id="cursorGlow"></div>
 
 <header>
-  <nav>
-<a href="#" class="logo" style="text-transform:uppercase; letter-spacing:1px;">Sahar Nadeem</a>
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <a class="navcta" href="#contact">Let's talk →</a>
-  </nav>
+ <nav>
+  <a href="#" class="logo" style="text-transform:uppercase; letter-spacing:1px;">Sahar Nadeem</a>
+  <div class="navlinks" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="navcta" href="#contact">Let's talk →</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 </header>
 
 <section class="hero">
@@ -610,6 +693,20 @@
     }
     animate();
   })();
+  const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
+}
 </script>
 
 </body>
